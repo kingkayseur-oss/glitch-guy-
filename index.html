@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🧠 TEXT BUG MDX — THE GLITCH GUY 🚀</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: #05030a;
+    overflow-x: hidden;
+}
+
+/* =========================
+   PERSONNAGE ARRIÈRE-PLAN
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(5,3,10,.97) 0%,
+            rgba(5,3,10,.82) 35%,
+            rgba(5,3,10,.35) 75%,
+            rgba(5,3,10,.75) 100%
+        ),
+        url("personnage.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: zoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+/* Lumière */
+
+.glow {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 75% 40%,
+            rgba(168,85,247,.30),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(91,33,182,.20),
+            transparent 40%
+        );
+}
+
+/* Particules */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    opacity: .35;
+
+    background-image:
+        radial-gradient(circle, #c084fc 1px, transparent 1px),
+        radial-gradient(circle, white 1px, transparent 1px);
+
+    background-size: 80px 80px, 120px 120px;
+
+    animation: particles 15s linear infinite;
+}
+
+@keyframes particles {
+    from {
+        background-position: 0 0, 0 0;
+    }
+
+    to {
+        background-position: 80px 160px, -120px 100px;
+    }
+}
+
+/* =========================
+   CONTENU
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    padding: 25px 15px 35px;
+}
+
+/* HEADER */
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 30px;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #a855f7,
+        0 0 25px #7c3aed;
+
+    animation: titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow:
+            0 0 8px #7c3aed;
+    }
+
+    to {
+        text-shadow:
+            0 0 15px #c084fc,
+            0 0 35px #7c3aed;
+    }
+}
+
+.header p {
+    margin-top: 8px;
+    color: #c9b7d8;
+}
+
+/* =========================
+   CARTE
+========================= */
+
+.card {
+    padding: 20px;
+
+    background: rgba(9,6,15,.86);
+
+    border: 1px solid rgba(168,85,247,.35);
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 0 40px rgba(126,34,206,.20);
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #dfcff0;
+}
+
+/* TEXTAREA */
+
+textarea {
+    width: 100%;
+    min-height: 145px;
+
+    padding: 15px;
+
+    resize: vertical;
+
+    background: #05030a;
+    color: white;
+
+    border: 1px solid #51306c;
+    border-radius: 15px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    transition: .3s;
+}
+
+textarea:focus {
+    border-color: #a855f7;
+
+    box-shadow:
+        0 0 18px rgba(168,85,247,.35);
+}
+
+/* =========================
+   CONTRÔLES
+========================= */
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+input,
+select {
+    width: 100%;
+
+    padding: 14px;
+
+    background: #08060d;
+    color: white;
+
+    border: 1px solid #51306c;
+    border-radius: 13px;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+input:focus,
+select:focus {
+    border-color: #a855f7;
+
+    box-shadow:
+        0 0 15px rgba(168,85,247,.25);
+}
+
+/* =========================
+   BOUTONS
+========================= */
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+button {
+    position: relative;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 14px;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+.multiply {
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #a855f7
+        );
+
+    box-shadow:
+        0 0 20px rgba(168,85,247,.30);
+}
+
+.copy {
+    background:
+        linear-gradient(
+            135deg,
+            #24152f,
+            #422653
+        );
+
+    border: 1px solid #70418b;
+}
+
+/* Effet lumineux */
+
+button::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.25),
+            transparent
+        );
+
+    transition: .5s;
+}
+
+button:hover::after {
+    left: 100%;
+}
+
+/* =========================
+   RESULTAT
+========================= */
+
+.result-section {
+    margin-top: 22px;
+}
+
+.result-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 9px;
+}
+
+.counter {
+    color: #c084fc;
+    font-size: 12px;
+}
+
+#result {
+    width: 100%;
+
+    min-height: 230px;
+    max-height: 500px;
+
+    overflow: auto;
+
+    padding: 15px;
+
+    background: #030207;
+
+    border: 1px solid #382347;
+    border-radius: 15px;
+
+    color: #eeeeee;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.result-animation {
+    animation: resultAppear .4s ease;
+}
+
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MESSAGE */
+
+#message {
+    text-align: center;
+
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    color: #c084fc;
+
+    font-size: 14px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #80648f;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+/* MOBILE */
+
+@media (max-width: 550px) {
+
+    .container {
+        padding: 18px 12px 30px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .controls,
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     ARRIÈRE-PLAN
+========================= -->
+
+<div class="background"></div>
+<div class="glow"></div>
+<div class="particles"></div>
+
+
+<div class="container">
+
+    <!-- TITRE -->
+
+    <div class="header">
+
+        <h1>
+            ✦ ☠️ TEXT BUG MDX👽 ✦
+        </h1>
+
+        <p>
+            Multiplie ton texte pour en faire un bug WhatsApp 🧠
+        </p>
+
+    </div>
+
+
+    <!-- APPLICATION -->
+
+    <div class="card">
+
+        <!-- TEXTE -->
+
+        <label for="text">
+            📝 TON TEXTE
+        </label>
+
+        <textarea
+            id="text"
+            placeholder="Écris ton texte ici..."
+        ></textarea>
+
+
+        <!-- PARAMÈTRES -->
+
+        <div class="controls">
+
+            <div>
+
+                <label for="number">
+                    🔢 NOMBRE DE FOIS
+                </label>
+
+                <input
+                    id="number"
+                    type="number"
+                    min="1"
+                    max="10000"
+                    value="10"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="separator">
+                    ↕ SÉPARATION
+                </label>
+
+                <select id="separator">
+
+                    <option value="newline">
+                        Nouvelle ligne
+                    </option>
+
+                    <option value="space">
+                        Espace
+                    </option>
+
+                    <option value="none">
+                        Sans séparation
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="buttons">
+
+            <button
+                class="multiply"
+                id="multiplyBtn"
+            >
+                ⚡ MULTIPLIER
+            </button>
+
+
+            <button
+                class="copy"
+                id="copyBtn"
+            >
+                📋 COPIER
+            </button>
+
+        </div>
+
+
+        <!-- RESULTAT -->
+
+        <div class="result-section">
+
+            <div class="result-title">
+
+                <label>
+                    📄 TEXTE MULTIPLIÉ
+                </label>
+
+                <span
+                    class="counter"
+                    id="counter"
+                >
+                    0 répétition
+                </span>
+
+            </div>
+
+
+            <div id="result">
+                Le résultat apparaîtra ici...
+            </div>
+
+        </div>
+
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <footer>
+        🚀 POWERED BY KING KAYSEUR THE GLITCH GUY 🧠  © inc 2026 
+    </footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+   RÉCUPÉRATION DES ÉLÉMENTS
+========================= */
+
+const textInput =
+    document.getElementById("text");
+
+const numberInput =
+    document.getElementById("number");
+
+const separatorInput =
+    document.getElementById("separator");
+
+const multiplyBtn =
+    document.getElementById("multiplyBtn");
+
+const copyBtn =
+    document.getElementById("copyBtn");
+
+const result =
+    document.getElementById("result");
+
+const counter =
+    document.getElementById("counter");
+
+const message =
+    document.getElementById("message");
+
+
+/* =========================
+   MULTIPLICATION RÉELLE
+========================= */
+
+multiplyBtn.addEventListener(
+    "click",
+    function() {
+
+        const texte =
+            textInput.value;
+
+        let nombre =
+            Number(numberInput.value);
+
+
+        /* Vérification du texte */
+
+        if (texte.trim() === "") {
+
+            message.textContent =
+                "⚠️ Écris d'abord ton texte.";
+
+            return;
+        }
+
+
+        /* Vérification du nombre */
+
+        if (
+            !Number.isInteger(nombre) ||
+            nombre < 1
+        ) {
+
+            message.textContent =
+                "⚠️ Entre un nombre valide.";
+
+            return;
+        }
+
+
+        /*
+         * Maximum 100 000 répétitions
+         * pour bloquer
+         * le navigateur/téléphone.
+         */
+
+        if (nombre > 100 000) {
+
+            nombre = 100 000;
+
+            numberInput.value = 100 000;
+        }
+
+
+        /* Choix du séparateur */
+
+        let separateur = "\n";
+
+
+        if (
+            separatorInput.value === "space"
+        ) {
+
+            separateur = " ";
+        }
+
+
+        if (
+            separatorInput.value === "none"
+        ) {
+
+            separateur = "";
+        }
+
+
+        /*
+         * ==================================
+         * LE TEXTE EST VRAIMENT REPRODUIT
+         * ==================================
+         *
+         * Exemple :
+         *
+         * texte = "Bonjour"
+         * nombre = 5
+         *
+         * Cela crée réellement le texte pour en faire un bug :
+         *
+         * Bonjour
+         * Bonjour
+         * Bonjour
+         * Bonjour
+         * Bonjour
+         *
+         */
+
+        const repetitions = [];
+
+        for (
+            let i = 0;
+            i < nombre;
+            i++
+        ) {
+
+            repetitions.push(texte);
+        }
+
+
+        /*
+         * Assemblage de toutes
+         * les répétitions
+         */
+
+        const resultatFinal =
+            repetitions.join(separateur);
+
+
+        /* Affichage du vrai résultat */
+
+        result.textContent =
+            resultatFinal;
+
+
+        /* Compteur */
+
+        counter.textContent =
+            nombre +
+            (
+                nombre > 1
+                ? " répétitions"
+                : " répétition"
+            );
+
+
+        message.textContent =
+            "✓ " +
+            nombre +
+            " copier effectué go sur WhatsApp et send 😈.";
+
+
+        /* Animation */
+
+        result.classList.remove(
+            "result-animation"
+        );
+
+        void result.offsetWidth;
+
+        result.classList.add(
+            "result-animation"
+        );
+
+    }
+);
+
+
+/* =========================
+   BOUTON COPIER
+========================= */
+
+copyBtn.addEventListener(
+    "click",
+    async function() {
+
+        const texteFinal =
+            result.textContent;
+
+
+        /* Vérification */
+
+        if (
+            !texteFinal ||
+            texteFinal ===
+            "Le résultat apparaîtra ici..."
+        ) {
+
+            message.textContent =
+                "⚠️ Multiplie d'abord ton texte pour en faire un bug.";
+
+            return;
+        }
+
+
+        /*
+         * Copie réelle dans
+         * le presse-papier
+         */
+
+        try {
+
+            await navigator.clipboard
+                .writeText(texteFinal);
+
+
+            message.textContent =
+                "✓ Tout le texte a été copié !🙃";
+
+
+        } catch (erreur) {
+
+            /*
+             * Méthode de secours
+             * pour certains navigateurs
+             */
+
+            const zone =
+                document.createElement(
+                    "textarea"
+                );
+
+            zone.value =
+                texteFinal;
+
+            document.body.appendChild(
+                zone
+            );
+
+            zone.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+            zone.remove();
+
+
+            message.textContent =
+                "✓ Tout le texte a été copié !🙃";
+        }
+
+    }
+);
+
+
+/* Effacer le message quand
+   l'utilisateur recommence à écrire */
+
+textInput.addEventListener(
+    "input",
+    function() {
+
+        message.textContent = "";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
